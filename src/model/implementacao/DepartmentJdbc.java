@@ -110,6 +110,5 @@ public class DepartmentJdbc implements DepartmentDataAcessObject {
 			BancoDados.closeStatement(statement);
 		}
 	}
-	
 
 }
