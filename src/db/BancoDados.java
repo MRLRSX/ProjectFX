@@ -11,22 +11,22 @@ import java.util.Properties;
 
 public class BancoDados {
 
-	@SuppressWarnings("unused")
 	private static Connection connection = null;
 
 	public static Connection getConnection() {
 		try {
 			Properties properties = loadProperties();
 			String urlBanco = properties.getProperty("dburl");
-			connection =  DriverManager.getConnection(urlBanco, properties);
-		}catch(SQLException erro){
+			connection = DriverManager.getConnection(urlBanco, properties);
+		} catch (SQLException erro) {
 			throw new BDadosException(erro.getMessage());
 		}
+
 		return connection;
 	}
 
 	private static Properties loadProperties() {
-		try (FileInputStream file = new FileInputStream("")) {
+		try (FileInputStream file = new FileInputStream("C:\\Curso Java\\ProjectFX\\src\\bancoDados.properties")) {
 			Properties properties = new Properties();
 			properties.load(file);
 			return properties;
