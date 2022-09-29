@@ -134,8 +134,8 @@ public class SellerJdbc implements SellerDataAcessObject {
 				seller.setId(result.getLong("id"));
 				seller.setName(result.getString("name"));
 				seller.setEmail(result.getString("email"));
-				seller.setBirthDate(LocalDate.parse(result.getString("birthdate"),
-						DateTimeFormatter.ofPattern("yyyy-MM-dd")));
+				seller.setBirthDate(
+						LocalDate.parse(result.getString("birthdate"), DateTimeFormatter.ofPattern("yyyy-MM-dd")));
 				seller.setBaseSalary(result.getDouble("basesalary"));
 				department.setId(result.getLong("department.id"));
 				department.setName(result.getString("department.name"));
@@ -190,7 +190,6 @@ public class SellerJdbc implements SellerDataAcessObject {
 			BancoDados.closeResultSet(result);
 		}
 	}
-
 
 	/** STACK-OVER-FLOW SAVE THE DAY */
 	private static java.sql.Date conversorTime(LocalDate localDate) {
