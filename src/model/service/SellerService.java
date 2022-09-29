@@ -21,6 +21,7 @@ public class SellerService {
 		}
 		else {
 			sellerDao.update(seller);
+			System.out.println(seller);
 		}
 	}
 	

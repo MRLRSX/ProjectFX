@@ -31,7 +31,7 @@ public class SellerJdbc implements SellerDataAcessObject {
 	@Override
 	public void insert(Seller seller) {
 		PreparedStatement statement = null;
-
+        
 		try {
 			statement = connection.prepareStatement(
 					"INSERT INTO seller (name, email, birthdate, basesalary, departmentid) VALUES (?, ?, ?, ?, ?)",
@@ -42,7 +42,7 @@ public class SellerJdbc implements SellerDataAcessObject {
 			statement.setDate(3, conversorTime(seller.getBirthDate()));
 			statement.setDouble(4, seller.getBaseSalary());
 			statement.setLong(5, seller.getDepartment().getId());
-
+            statement.executeUpdate();
 		} catch (SQLException error) {
 			throw new BDadosException(error.getMessage());
 		} finally {
@@ -56,12 +56,13 @@ public class SellerJdbc implements SellerDataAcessObject {
 		PreparedStatement statement = null;
 		try {
 			statement = connection.prepareStatement(
-					"UPDATE seller SET name = ?, email = ?, birthdate = ?, departmentid = ? WHERE id = ? ");
+					"UPDATE seller SET name = ?, email = ?, birthdate = ?, departmentid = ?, basesalary = ? WHERE id = ? ");
 			statement.setString(1, seller.getName());
 			statement.setString(2, seller.getEmail());
 			statement.setDate(3, conversorTime(seller.getBirthDate()));
 			statement.setLong(4, seller.getDepartment().getId());
-			statement.setLong(5, seller.getId());
+			statement.setDouble(5, seller.getBaseSalary());
+			statement.setLong(6, seller.getId());
 			statement.executeUpdate();
 		} catch (SQLException error) {
 			throw new BDadosException(error.getMessage());

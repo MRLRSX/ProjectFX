@@ -1,7 +1,5 @@
 package gui.uti;
 
-import java.sql.Date;
-import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.Locale;
@@ -19,9 +17,9 @@ public class Utils {
 		return (Stage) ((Node) event.getSource()).getScene().getWindow();
 	}
 
-	public static Integer tryParseToInt(String str) {
+	public static Long tryParseToLong(String str) {
 		try {
-			return Integer.parseInt(str);
+			return Long.parseLong(str);
 		} catch (NumberFormatException e) {
 			return null;
 		}
@@ -35,13 +33,13 @@ public class Utils {
 		}
 	}
 
-	public static <T> void formatTableColumnDate(TableColumn<T, Date> tableColumn, String format) {
+	public static <T> void formatTableColumnDate(TableColumn<T, LocalDate> tableColumn, String format) {
 		tableColumn.setCellFactory(column -> {
-			TableCell<T, Date> cell = new TableCell<T, Date>() {
-				private SimpleDateFormat sdf = new SimpleDateFormat(format);
+			TableCell<T, LocalDate> cell = new TableCell<T, LocalDate>() {
+				private DateTimeFormatter sdf = DateTimeFormatter.ofPattern(format);
 
 				@Override
-				protected void updateItem(Date item, boolean empty) {
+				protected void updateItem(LocalDate item, boolean empty) {
 					super.updateItem(item, empty);
 					if (empty) {
 						setText(null);
